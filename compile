@@ -1,0 +1,11 @@
+#!/bin/bash
+
+rm classes/*.class
+javac -d classes src/Views/SimpleCommander.java
+if [ $? -eq 0 ]
+then
+    echo "Compilation success !"
+else
+    echo "Compilation failed..."
+fi
+
