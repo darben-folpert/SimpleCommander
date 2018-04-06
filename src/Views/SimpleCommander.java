@@ -89,7 +89,7 @@ public class SimpleCommander extends Application
     }
 
 
-// ===== Other classes, mainly event handlers
+    // Event handler: clic on the Exit button
     private class ClickExitButtonEventHandler implements EventHandler<ActionEvent>
     {
         public void handle(ActionEvent event)
@@ -99,6 +99,7 @@ public class SimpleCommander extends Application
         }
     }
 
+    // Event handler: switching scenes
     private class ChangeSceneEventHandler implements EventHandler<ActionEvent>
     {
         private int newScene;
@@ -122,13 +123,13 @@ public class SimpleCommander extends Application
         }
     }
 
+    // Event handler: closing the main window (this view)
     private class ClosingEventHandler implements EventHandler<WindowEvent>
     {
         public void handle(WindowEvent event)
         {
             closingWindow();
         }
-
     }
 }
 
