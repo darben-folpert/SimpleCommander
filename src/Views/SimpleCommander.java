@@ -1,8 +1,12 @@
+import java.util.Optional;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -91,10 +95,10 @@ public class SimpleCommander extends Application
 
     private void closingWindow()
     {
-        // TODO: check newboston video "5 - Creating Alert Boxes"
-        //Boolean resultYes = ConfirmBox.display("Quit ?", "Are you sure you wanna quit ?");
-        Boolean resultYes = true;
-        if (resultYes)
+        Alert alertBox = new Alert(AlertType.CONFIRMATION, "Do you really want to quit ?");
+        alertBox.setTitle("Quit");
+        Optional<ButtonType> userChoice = alertBox.showAndWait();
+        if (userChoice.isPresent() && userChoice.get() == ButtonType.OK)
             window.close();
     }
 
