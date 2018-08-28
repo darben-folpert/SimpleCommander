@@ -3,18 +3,20 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+//import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 
 public class SimpleCommander extends Application
 {
     private final String appVersion = "0.1";
+    private final String appName = "SimpleCommander";
     private Stage window;
     private Scene scene1;
-    private Scene scene2;
 
     public static void main(String[] args) throws Exception
     {
@@ -30,19 +32,44 @@ public class SimpleCommander extends Application
     public void start(Stage primaryStage) throws Exception
     {
         window = primaryStage;
-        window.setTitle("FileSystemXP v" + this.appVersion);
+        window.setTitle(this.appName + " v" + this.appVersion);
 
         createScenes();
 
         window.setScene(scene1);
+        window.setMinHeight(80);
+        window.setMinWidth(120);
         window.setOnCloseRequest(new ClosingEventHandler());
         window.show();
     }
 
     private void createScenes()
     {
-        scene1 = createScene1();
-        scene2 = createScene2();
+        scene1 = createMainScene();
+    }
+
+    private Scene createMainScene()
+    {
+        AnchorPane anchorPane = createAnchorPane();
+        return new Scene(anchorPane, 640, 480);
+    }
+
+    private AnchorPane createAnchorPane()
+    {
+        GridPane grid = createGrid();
+        Button exitButton = createExitButton();
+
+        AnchorPane anchorPane = new AnchorPane();
+        HBox hb = new HBox();
+        hb.setPadding(new Insets(0, 10, 10, 10));
+        hb.setSpacing(10);
+        hb.getChildren().addAll(exitButton);
+        anchorPane.getChildren().addAll(grid, hb);
+
+        AnchorPane.setBottomAnchor(hb, 8.0);
+        AnchorPane.setRightAnchor(hb, 5.0);
+        AnchorPane.setTopAnchor(grid, 10.0);
+        return anchorPane;
     }
 
     private Button createExitButton()
@@ -52,40 +79,23 @@ public class SimpleCommander extends Application
         return exitButton;
     }
 
-    private Scene createScene1()
+    private GridPane createGrid()
     {
-        VBox layout1 = new VBox(30);
-        Label label1 = new Label("First scene here");
-        Button button1 = new Button("Button 1");
-        button1.setOnAction(new ChangeSceneEventHandler(2));
-        Button exitButton = createExitButton();
-
-        layout1.getChildren().add(label1);
-        layout1.getChildren().add(button1);
-        layout1.getChildren().add(exitButton);
-        Scene scene = new Scene(layout1, 640, 480);
-        return scene;
-    }
-
-    private Scene createScene2()
-    {
-        VBox layout2 = new VBox(30);
-        Label label2 = new Label("Second scene here");
-        Button button2 = new Button("Button 2");
-        button2.setOnAction(new ChangeSceneEventHandler(1));
-        Button exitButton = createExitButton();
-
-        layout2.getChildren().add(label2);
-        layout2.getChildren().add(button2);
-        layout2.getChildren().add(exitButton);
-        Scene scene = new Scene(layout2, 640, 480);
-        //scene.setFill(javafx.scene.paint.Color.TRANSPARENT); -> this has no effect
-        return scene;
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setGridLinesVisible(true);
+        grid.setPadding(new Insets(10, 10, 10, 10));
+        return grid;
     }
 
     private void closingWindow()
     {
-        System.out.println("I'm gonna close that shit");
+        // TODO: check newboston video "5 - Creating Alert Boxes"
+        //Boolean resultYes = ConfirmBox.display("Quit ?", "Are you sure you wanna quit ?");
+        Boolean resultYes = true;
+        if (resultYes)
+            window.close();
     }
 
 
@@ -95,31 +105,6 @@ public class SimpleCommander extends Application
         public void handle(ActionEvent event)
         {
             closingWindow();
-            window.close();
-        }
-    }
-
-    // Event handler: switching scenes
-    private class ChangeSceneEventHandler implements EventHandler<ActionEvent>
-    {
-        private int newScene;
-
-        public ChangeSceneEventHandler(int scene)
-        {
-            this.newScene = scene;
-        }
-
-        public void handle(ActionEvent event)
-        {
-            switch (newScene)
-            {
-                case 1:
-                    window.setScene(scene1);
-                    break;
-                case 2:
-                    window.setScene(scene2);
-                    break;
-            }
         }
     }
 
@@ -128,6 +113,7 @@ public class SimpleCommander extends Application
     {
         public void handle(WindowEvent event)
         {
+            event.consume();
             closingWindow();
         }
     }
