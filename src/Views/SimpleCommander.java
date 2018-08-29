@@ -2,14 +2,21 @@ import java.util.Optional;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TabPane.TabClosingPolicy;
+
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+
 //import javafx.scene.layout.VBox;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -41,8 +48,8 @@ public class SimpleCommander extends Application
         createScenes();
 
         window.setScene(scene1);
-        window.setMinHeight(80);
-        window.setMinWidth(120);
+        window.setMinHeight(240);
+        window.setMinWidth(320);
         window.setOnCloseRequest(new ClosingEventHandler());
         window.show();
     }
@@ -61,6 +68,7 @@ public class SimpleCommander extends Application
     private AnchorPane createAnchorPane()
     {
         GridPane grid = createGrid();
+        createTabs(grid);
         Button exitButton = createExitButton();
 
         AnchorPane anchorPane = new AnchorPane();
@@ -73,6 +81,7 @@ public class SimpleCommander extends Application
         AnchorPane.setBottomAnchor(hb, 8.0);
         AnchorPane.setRightAnchor(hb, 5.0);
         AnchorPane.setTopAnchor(grid, 10.0);
+        AnchorPane.setLeftAnchor(grid, 10.0);
         return anchorPane;
     }
 
@@ -102,6 +111,16 @@ public class SimpleCommander extends Application
             window.close();
     }
 
+    private void createTabs(Pane parent)
+    {
+        TabPane tabPane = new TabPane();
+        Tab tabSearchInFolder = new Tab("Tab1");
+        Tab tabSearchInFiles = new Tab("Tab2");
+        tabPane.getTabs().add(tabSearchInFolder);
+        tabPane.getTabs().add(tabSearchInFiles);
+        tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+        parent.getChildren().add(tabPane);
+    }
 
     // Event handler: clic on the Exit button
     private class ClickExitButtonEventHandler implements EventHandler<ActionEvent>
