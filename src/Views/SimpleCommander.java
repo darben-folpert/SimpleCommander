@@ -4,6 +4,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -11,16 +12,19 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
+import javafx.scene.control.TextField;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
-//import javafx.scene.layout.VBox;
+import javafx.geometry.Insets;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
+import javafx.fxml.FXMLLoader;
 
 public class SimpleCommander extends Application
 {
@@ -37,7 +41,7 @@ public class SimpleCommander extends Application
 
     public void init()
     {
-        //TODO: logging of message "application starting..."
+        //TODO: Add some logging of messages (warnings, errors)
     }
 
     public void start(Stage primaryStage) throws Exception
@@ -67,21 +71,22 @@ public class SimpleCommander extends Application
 
     private AnchorPane createAnchorPane()
     {
-        GridPane grid = createGrid();
-        createTabs(grid);
-        Button exitButton = createExitButton();
+        VBox vbox = createVbox();
+        createSearchControls(vbox);
+        createTabs(vbox);
 
         AnchorPane anchorPane = new AnchorPane();
         HBox hb = new HBox();
         hb.setPadding(new Insets(0, 10, 10, 10));
         hb.setSpacing(10);
+        Button exitButton = createExitButton();
         hb.getChildren().addAll(exitButton);
-        anchorPane.getChildren().addAll(grid, hb);
+        anchorPane.getChildren().addAll(vbox, hb);
 
         AnchorPane.setBottomAnchor(hb, 8.0);
         AnchorPane.setRightAnchor(hb, 5.0);
-        AnchorPane.setTopAnchor(grid, 10.0);
-        AnchorPane.setLeftAnchor(grid, 10.0);
+        AnchorPane.setTopAnchor(vbox, 10.0);
+        AnchorPane.setLeftAnchor(vbox, 10.0);
         return anchorPane;
     }
 
@@ -92,14 +97,37 @@ public class SimpleCommander extends Application
         return exitButton;
     }
 
-    private GridPane createGrid()
+    private VBox createVbox()
     {
-        GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setGridLinesVisible(true);
-        grid.setPadding(new Insets(10, 10, 10, 10));
-        return grid;
+        VBox vbox = new VBox();
+        vbox.setSpacing(30);
+        return vbox;
+    }
+
+    private void createSearchControls(Pane parent)
+    {
+        HBox hb = new HBox();
+        hb.setSpacing(10);
+
+        Label labelSearch = new Label("Find text");
+        TextField txtSearch = new TextField();
+        txtSearch.setPromptText("Enter the text to find");
+
+        hb.getChildren().addAll(labelSearch, txtSearch);
+        //hb.setMaxWidth(Double.MAX_VALUE);
+        parent.getChildren().add(hb);
+    }
+
+    private void createTabs(Pane parent)
+    {
+        TabPane tabPane = new TabPane();
+        tabPane.setStyle("-fx-background-color: lightblue");
+        Tab tabSearchInFolder = new TabSearchFileContentInFolder("Search in folder");
+        Tab tabSearchInFiles = new TabSearchFileContentInFiles("Search in list of files");
+        tabPane.getTabs().add(tabSearchInFolder);
+        tabPane.getTabs().add(tabSearchInFiles);
+        tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+        parent.getChildren().add(tabPane);
     }
 
     private void closingWindow()
@@ -109,17 +137,6 @@ public class SimpleCommander extends Application
         Optional<ButtonType> userChoice = alertBox.showAndWait();
         if (userChoice.isPresent() && userChoice.get() == ButtonType.OK)
             window.close();
-    }
-
-    private void createTabs(Pane parent)
-    {
-        TabPane tabPane = new TabPane();
-        Tab tabSearchInFolder = new Tab("Tab1");
-        Tab tabSearchInFiles = new Tab("Tab2");
-        tabPane.getTabs().add(tabSearchInFolder);
-        tabPane.getTabs().add(tabSearchInFiles);
-        tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
-        parent.getChildren().add(tabPane);
     }
 
     // Event handler: clic on the Exit button

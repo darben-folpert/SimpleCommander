@@ -1,7 +1,7 @@
 #!/bin/bash
 
 rm classes/*.class
-javac -d classes src/Views/SimpleCommander.java
+javac -d classes @source-files.txt
 if [ $? -eq 0 ]
 then
     echo "Compilation success !"

@@ -1,0 +1,3 @@
+src/Views/SimpleCommander.java
+src/Views/TabSearchFileContentInFiles.java
+src/Views/TabSearchFileContentInFolder.java
