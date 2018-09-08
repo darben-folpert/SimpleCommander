@@ -13,6 +13,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.GridPane;
@@ -24,7 +25,6 @@ import javafx.geometry.Insets;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 
 public class SimpleCommander extends Application
 {
@@ -66,7 +66,7 @@ public class SimpleCommander extends Application
     private Scene createMainScene()
     {
         AnchorPane anchorPane = createAnchorPane();
-        return new Scene(anchorPane, 640, 480);
+        return new Scene(anchorPane, 640, 680);
     }
 
     private AnchorPane createAnchorPane()
@@ -74,6 +74,7 @@ public class SimpleCommander extends Application
         VBox vbox = createVbox();
         createSearchControls(vbox);
         createTabs(vbox);
+        createResultArea(vbox);
 
         AnchorPane anchorPane = new AnchorPane();
         HBox hb = new HBox();
@@ -128,6 +129,13 @@ public class SimpleCommander extends Application
         tabPane.getTabs().add(tabSearchInFiles);
         tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
         parent.getChildren().add(tabPane);
+    }
+
+    private void createResultArea(Pane parent)
+    {
+        Label lblResult = new Label("Search result:");
+        TextArea txtResult = new TextArea();
+        parent.getChildren().addAll(lblResult, txtResult);
     }
 
     private void closingWindow()

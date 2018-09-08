@@ -2,6 +2,7 @@
 
 rm classes/*.class
 javac -d classes @source-files.txt
+
 if [ $? -eq 0 ]
 then
     echo "Compilation success !"
