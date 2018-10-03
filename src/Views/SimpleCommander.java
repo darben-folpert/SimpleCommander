@@ -26,12 +26,15 @@ import javafx.geometry.Insets;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+
 public class SimpleCommander extends Application
 {
     private final String appVersion = "0.1";
     private final String appName = "SimpleCommander";
     private Stage window;
     private Scene scene1;
+    private TextArea txtResult;
+
 
     public static void main(String[] args) throws Exception
     {
@@ -41,9 +44,10 @@ public class SimpleCommander extends Application
 
     public void init()
     {
-        //TODO: Add some logging of messages (warnings, errors)
+        System.out.println("Calling method SimpleCommander.init");
     }
 
+    @Override
     public void start(Stage primaryStage) throws Exception
     {
         window = primaryStage;
@@ -56,6 +60,12 @@ public class SimpleCommander extends Application
         window.setMinWidth(320);
         window.setOnCloseRequest(new ClosingEventHandler());
         window.show();
+    }
+
+    @Override
+    public void stop()
+    {
+        System.out.println("===> Closing application");
     }
 
     private void createScenes()
@@ -133,9 +143,11 @@ public class SimpleCommander extends Application
 
     private void createResultArea(Pane parent)
     {
+        Button searchBtn = new Button("Search");
         Label lblResult = new Label("Search result:");
-        TextArea txtResult = new TextArea();
-        parent.getChildren().addAll(lblResult, txtResult);
+        txtResult = new TextArea();
+        searchBtn.setOnAction(new SearchRequestHandler(txtResult));
+        parent.getChildren().addAll(searchBtn, lblResult, txtResult);
     }
 
     private void closingWindow()
