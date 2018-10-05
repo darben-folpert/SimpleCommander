@@ -1,21 +1,33 @@
+import laglibjava.FileService;
+import laglibjava.FileSystemService;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.TextArea;
 
 
 class SearchRequestHandler implements EventHandler<ActionEvent>
 {
-    private TextArea resultArea;
+    private SimpleCommander mainWindow;
 
-    public SearchRequestHandler(TextArea resultArea)
+    public SearchRequestHandler(SimpleCommander mainWindow)
     {
-        this.resultArea = resultArea;
+        this.mainWindow = mainWindow;
     }
 
     public void handle(ActionEvent event)
     {
         System.out.println("calling SearchRequestHandler");
-        this.resultArea.appendText("This is the result from EventHandler");
+        String folderPath = mainWindow.getFieldValue(0);
+        String searchedText = mainWindow.getFieldValue(1);
+        String filenamePattern = mainWindow.getFieldValue(2);
+        System.out.println("    folderPath: " + folderPath);
+        System.out.println("    searchedText: " + searchedText);
+        System.out.println("    filenamePattern: " + filenamePattern);
+        //searchInFilesFromFolder
+        //this.resultArea.appendText("This is the result from EventHandler");
     }
+
+    /*private void searchInFilesFromFolder(String folderPath, String whatToSearch, String filenamePattern)
+    {
+    }*/
 }
 

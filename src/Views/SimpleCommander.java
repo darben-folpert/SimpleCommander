@@ -1,14 +1,10 @@
-import java.util.Optional;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
@@ -33,8 +29,9 @@ public class SimpleCommander extends Application
     private final String appName = "SimpleCommander";
     private Stage window;
     private Scene scene1;
-    private TextArea txtResult;
 
+    TextField txtSearch;
+    TabSearchFileContentInFolder tabSearchInFolder;
 
     public static void main(String[] args) throws Exception
     {
@@ -121,7 +118,7 @@ public class SimpleCommander extends Application
         hb.setSpacing(10);
 
         Label labelSearch = new Label("Find text");
-        TextField txtSearch = new TextField();
+        txtSearch = new TextField();
         txtSearch.setPromptText("Enter the text to find");
 
         hb.getChildren().addAll(labelSearch, txtSearch);
@@ -133,7 +130,7 @@ public class SimpleCommander extends Application
     {
         TabPane tabPane = new TabPane();
         tabPane.setStyle("-fx-background-color: lightblue");
-        Tab tabSearchInFolder = new TabSearchFileContentInFolder("Search in folder");
+        tabSearchInFolder = new TabSearchFileContentInFolder("Search in folder");
         Tab tabSearchInFiles = new TabSearchFileContentInFiles("Search in list of files");
         tabPane.getTabs().add(tabSearchInFolder);
         tabPane.getTabs().add(tabSearchInFiles);
@@ -145,18 +142,39 @@ public class SimpleCommander extends Application
     {
         Button searchBtn = new Button("Search");
         Label lblResult = new Label("Search result:");
-        txtResult = new TextArea();
-        searchBtn.setOnAction(new SearchRequestHandler(txtResult));
+        TextArea txtResult = new TextArea();
+        searchBtn.setOnAction(new SearchRequestHandler(this));
         parent.getChildren().addAll(searchBtn, lblResult, txtResult);
     }
 
     private void closingWindow()
     {
-        Alert alertBox = new Alert(AlertType.CONFIRMATION, "Do you really want to quit ?");
-        alertBox.setTitle("Quit");
-        Optional<ButtonType> userChoice = alertBox.showAndWait();
-        if (userChoice.isPresent() && userChoice.get() == ButtonType.OK)
+        CloseWindowConfirmationDialog confirmationDialog = new CloseWindowConfirmationDialog();
+        confirmationDialog.showDialogAndWait();
+        if (confirmationDialog.getCloseWindowConfirmation())
             window.close();
+    }
+
+    public String getFieldValue(int fieldIndex)
+    {
+        String fieldValue = "";
+        if ((fieldIndex > 2) || (fieldIndex < 0))
+            return fieldValue;
+
+        switch (fieldIndex)
+        {
+            case 0: // folder path
+                return tabSearchInFolder.getFolderPath();
+
+            case 1: // text we search for
+                return txtSearch.getText();
+
+            case 2: // file name pattern
+                return tabSearchInFolder.getFileNamePattern();
+
+            default:
+                return "";
+        }
     }
 
     // Event handler: clic on the Exit button

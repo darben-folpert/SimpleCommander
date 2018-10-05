@@ -8,6 +8,9 @@ import javafx.geometry.Insets;
 
 public class TabSearchFileContentInFolder extends Tab
 {
+    TextField txtFolderPath;
+    TextField txtFileNamePattern;
+
     public TabSearchFileContentInFolder(String tabTitle)
     {
         super(tabTitle);
@@ -15,6 +18,16 @@ public class TabSearchFileContentInFolder extends Tab
         vbox.setSpacing(30);
         createControls(vbox);
         this.setContent(vbox);
+    }
+
+    public String getFolderPath()
+    {
+        return txtFolderPath.getText();
+    }
+
+    public String getFileNamePattern()
+    {
+        return txtFileNamePattern.getText();
     }
 
     private void createControls(Pane parent)
@@ -32,10 +45,10 @@ public class TabSearchFileContentInFolder extends Tab
         hb.setSpacing(20);
 
         Label label = new Label("Folder path");
-        TextField textField = new TextField();
-        textField.setMaxWidth(Double.MAX_VALUE);
+        txtFolderPath = new TextField();
+        txtFolderPath.setMaxWidth(Double.MAX_VALUE);
 
-        hb.getChildren().addAll(label, textField);
+        hb.getChildren().addAll(label, txtFolderPath);
         parent.getChildren().add(hb);
     }
 
@@ -45,13 +58,12 @@ public class TabSearchFileContentInFolder extends Tab
         hb.setSpacing(20);
 
         Label label = new Label("Fiel name pattern");
-        TextField textField = new TextField();
-        textField.setPromptText("e.g: *.txt");
-        textField.setMaxWidth(Double.MAX_VALUE);
+        txtFileNamePattern = new TextField();
+        txtFileNamePattern.setPromptText("e.g: *.txt");
+        txtFileNamePattern.setMaxWidth(Double.MAX_VALUE);
 
-        hb.getChildren().addAll(label, textField);
+        hb.getChildren().addAll(label, txtFileNamePattern);
         parent.getChildren().add(hb);
     }
-
 }
 
