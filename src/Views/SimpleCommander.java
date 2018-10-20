@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -32,6 +33,7 @@ public class SimpleCommander extends Application
 
     TextField txtSearch;
     TabSearchFileContentInFolder tabSearchInFolder;
+    TextArea txtResult;
 
     public static void main(String[] args) throws Exception
     {
@@ -142,14 +144,14 @@ public class SimpleCommander extends Application
     {
         Button searchBtn = new Button("Search");
         Label lblResult = new Label("Search result:");
-        TextArea txtResult = new TextArea();
+        txtResult = new TextArea();
         searchBtn.setOnAction(new SearchRequestHandler(this));
         parent.getChildren().addAll(searchBtn, lblResult, txtResult);
     }
 
     private void closingWindow()
     {
-        CloseWindowConfirmationDialog confirmationDialog = new CloseWindowConfirmationDialog();
+        DialogCloseWindowConfirmation confirmationDialog = new DialogCloseWindowConfirmation();
         confirmationDialog.showDialogAndWait();
         if (confirmationDialog.getCloseWindowConfirmation())
             window.close();
@@ -175,6 +177,13 @@ public class SimpleCommander extends Application
             default:
                 return "";
         }
+    }
+
+    public void setResult(ArrayList<String> filenames)
+    {
+        txtResult.clear();
+        for (String filename : filenames)
+            txtResult.appendText(filename + System.getProperty("line.separator"));
     }
 
     // Event handler: clic on the Exit button
