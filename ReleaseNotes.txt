@@ -1,0 +1,4 @@
+===== Version 0.1 - Initial version
+- Implementation of search into text files:
+  Inputs are: path to folder, the text to find, a file name pattern to use as filtering (e.g. "*.txt") to narrow search to specific files.
+- Display search result in a text area. Result is the list of files that contain the text user wants to find.
