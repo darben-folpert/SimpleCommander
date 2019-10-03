@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.List;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -11,6 +13,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Control;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.GridPane;
@@ -26,7 +29,7 @@ import javafx.event.EventHandler;
 
 public class SimpleCommander extends Application
 {
-    private final String appVersion = "0.1";
+    private final String appVersion = "0.3";
     private final String appName = "SimpleCommander";
     private Stage window;
     private Scene scene1;
@@ -34,6 +37,7 @@ public class SimpleCommander extends Application
     TextField txtSearch;
     TabSearchFileContentInFolder tabSearchInFolder;
     TextArea txtResult;
+    Hashtable<String, Control> uiControls;
 
     public static void main(String[] args) throws Exception
     {
@@ -51,6 +55,7 @@ public class SimpleCommander extends Application
     {
         window = primaryStage;
         window.setTitle(this.appName + " v" + this.appVersion);
+        uiControls = new Hashtable<String, Control>();
 
         createScenes();
 
@@ -104,6 +109,7 @@ public class SimpleCommander extends Application
     {
         Button exitButton = new Button("Quit");
         exitButton.setOnAction(new ClickExitButtonEventHandler());
+        uiControls.put("btnExit", exitButton);
         return exitButton;
     }
 
@@ -124,13 +130,14 @@ public class SimpleCommander extends Application
         txtSearch.setPromptText("Enter the text to find");
 
         hb.getChildren().addAll(labelSearch, txtSearch);
-        //hb.setMaxWidth(Double.MAX_VALUE);
         parent.getChildren().add(hb);
+        uiControls.put("txtSearch", txtSearch);
     }
 
     private void createTabs(Pane parent)
     {
         TabPane tabPane = new TabPane();
+        uiControls.put("tabPane", tabPane);
         tabPane.setStyle("-fx-background-color: lightblue");
         tabSearchInFolder = new TabSearchFileContentInFolder("Search in folder");
         Tab tabSearchInFiles = new TabSearchFileContentInFiles("Search in list of files");
@@ -145,8 +152,13 @@ public class SimpleCommander extends Application
         Button searchBtn = new Button("Search");
         Label lblResult = new Label("Search result:");
         txtResult = new TextArea();
-        searchBtn.setOnAction(new SearchRequestHandler(this));
-        parent.getChildren().addAll(searchBtn, lblResult, txtResult);
+        searchBtn.setOnAction(new SearchRequestHandler(this, uiControls));
+        Label lblProgress = new Label("");
+        parent.getChildren().addAll(searchBtn, lblResult, txtResult, lblProgress);
+
+        uiControls.put("btnSearch", searchBtn);
+        uiControls.put("txtResult", txtResult);
+        uiControls.put("lblProgress", lblProgress);
     }
 
     private void closingWindow()
@@ -177,13 +189,6 @@ public class SimpleCommander extends Application
             default:
                 return "";
         }
-    }
-
-    public void setResult(ArrayList<String> filenames)
-    {
-        txtResult.clear();
-        for (String filename : filenames)
-            txtResult.appendText(filename + System.getProperty("line.separator"));
     }
 
     // Event handler: clic on the Exit button

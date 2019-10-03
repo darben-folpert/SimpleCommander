@@ -57,7 +57,7 @@ public class TabSearchFileContentInFolder extends Tab
         HBox hb = new HBox();
         hb.setSpacing(20);
 
-        Label label = new Label("Fiel name pattern");
+        Label label = new Label("Field name pattern");
         txtFileNamePattern = new TextField();
         txtFileNamePattern.setPromptText("e.g: *.txt");
         txtFileNamePattern.setMaxWidth(Double.MAX_VALUE);
