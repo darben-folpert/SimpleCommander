@@ -1,2 +1,5 @@
-java -classpath classes SimpleCommander
+#!/bin/bash
+
+#java -classpath ./classes:./lib/javafx.graphics.jar SimpleCommander
+java --module-path $PATH_TO_FX --add-modules javafx.controls -classpath ./classes SimpleCommander
 

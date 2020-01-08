@@ -1,8 +1,12 @@
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+
+// ===== JavaFX imports - BEGIN
 import javafx.application.Application;
 import javafx.stage.Stage;
+// ===== JavaFX imports - END
+/*
 import javafx.stage.WindowEvent;
 
 import javafx.scene.Scene;
@@ -25,19 +29,22 @@ import javafx.geometry.Insets;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+*/
 
 
 public class SimpleCommander extends Application
 {
     private final String appVersion = "0.3";
     private final String appName = "SimpleCommander";
-    private Stage window;
-    private Scene scene1;
+    //private Stage window;
+    //private Scene scene1;
 
+/*
     TextField txtSearch;
     TabSearchFileContentInFolder tabSearchInFolder;
     TextArea txtResult;
     Hashtable<String, Control> uiControls;
+*/
 
     public static void main(String[] args) throws Exception
     {
@@ -53,6 +60,8 @@ public class SimpleCommander extends Application
     @Override
     public void start(Stage primaryStage) throws Exception
     {
+        System.out.println("---> inside start");
+/*
         window = primaryStage;
         window.setTitle(this.appName + " v" + this.appVersion);
         uiControls = new Hashtable<String, Control>();
@@ -64,6 +73,7 @@ public class SimpleCommander extends Application
         window.setMinWidth(320);
         window.setOnCloseRequest(new ClosingEventHandler());
         window.show();
+*/
     }
 
     @Override
@@ -72,6 +82,7 @@ public class SimpleCommander extends Application
         System.out.println("===> Closing application");
     }
 
+/*
     private void createScenes()
     {
         scene1 = createMainScene();
@@ -209,5 +220,6 @@ public class SimpleCommander extends Application
             closingWindow();
         }
     }
+*/
 }
 
