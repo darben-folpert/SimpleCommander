@@ -5,11 +5,9 @@ import java.util.List;
 // ===== JavaFX imports - BEGIN
 import javafx.application.Application;
 import javafx.stage.Stage;
-// ===== JavaFX imports - END
-/*
 import javafx.stage.WindowEvent;
-
 import javafx.scene.Scene;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
@@ -20,7 +18,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Control;
 
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -29,22 +26,20 @@ import javafx.geometry.Insets;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-*/
+// ===== JavaFX imports - END
 
 
 public class SimpleCommander extends Application
 {
     private final String appVersion = "0.3";
-    private final String appName = "SimpleCommander";
-    //private Stage window;
-    //private Scene scene1;
+    private final String appName = "SearchInFiles";
+    private Stage window;
+    private Scene scene1;
 
-/*
     TextField txtSearch;
     TabSearchFileContentInFolder tabSearchInFolder;
     TextArea txtResult;
     Hashtable<String, Control> uiControls;
-*/
 
     public static void main(String[] args) throws Exception
     {
@@ -61,7 +56,6 @@ public class SimpleCommander extends Application
     public void start(Stage primaryStage) throws Exception
     {
         System.out.println("---> inside start");
-/*
         window = primaryStage;
         window.setTitle(this.appName + " v" + this.appVersion);
         uiControls = new Hashtable<String, Control>();
@@ -73,7 +67,6 @@ public class SimpleCommander extends Application
         window.setMinWidth(320);
         window.setOnCloseRequest(new ClosingEventHandler());
         window.show();
-*/
     }
 
     @Override
@@ -82,7 +75,6 @@ public class SimpleCommander extends Application
         System.out.println("===> Closing application");
     }
 
-/*
     private void createScenes()
     {
         scene1 = createMainScene();
@@ -220,6 +212,5 @@ public class SimpleCommander extends Application
             closingWindow();
         }
     }
-*/
 }
 

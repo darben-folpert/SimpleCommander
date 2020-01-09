@@ -3,7 +3,7 @@
 rm classes/*.class
 #javac -d classes -cp ./lib/javafx.graphics.jar @source-files.txt
 #javac -d classes @source-files.txt
-javac -d classes --module-path $PATH_TO_FX --add-modules javafx.controls @source-files.txt
+javac -d classes -cp ./lib/laglibjava.jar --module-path $PATH_TO_FX --add-modules javafx.controls @source-files.txt
 
 if [ $? -eq 0 ]
 then

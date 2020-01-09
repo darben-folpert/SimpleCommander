@@ -2,16 +2,19 @@ import javafx.scene.control.Control;
 import javafx.concurrent.Task;
 import javafx.concurrent.Worker;
 import javafx.application.Platform;
+
+import java.io.FileNotFoundException;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Hashtable;
 import java.util.ArrayList;
-import java.io.FileNotFoundException;
+
 import laglibjava.TextFileService;
 import laglibjava.FileSystemService;
 
 // refactor: can we get rid of these ?
 //   -> deal with the real control in some other class ?
+//   -> try to avoid passing real UI objects into this class. Is this possible ?
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Label;
 
