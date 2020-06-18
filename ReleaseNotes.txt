@@ -1,9 +1,18 @@
-===== Version 0.2 - 201910
-- Using a new thread for search
+===== Version 0.4 - 2020-XX
+To be filled
+
+
+===== Version 0.3 - 2020-01
+- Now using JavaFX 11
 - Use newest version of laglibjava
+- Application renamed to "SearchInTextFiles"
 
 
-===== Version 0.1 - Initial version
+===== Version 0.2 - 2018-10
+- Using a new thread for search
+
+
+===== Version 0.1 - 2018-09 Initial version
 - Implementation of search into text files:
   Inputs are:
     + Path to folder to scan
