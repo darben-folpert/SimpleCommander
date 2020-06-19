@@ -1,4 +1,9 @@
 @echo off
 del classes\*.class
-"C:\Program Files\Java\jdk1.8.0_131\bin\javac.exe" -d classes -cp .\lib\laglibjava.jar @source-files.txt
+"C:\David\Softwares\jdk-14\bin\javac.exe" -d classes -cp .\lib\laglibjava.jar --module-path %PATH_TO_FX% --add-modules javafx.controls @source-files.txt
+if errorlevel 1 (
+  echo This is not good
+) else (
+echo This is good
+)
 pause
