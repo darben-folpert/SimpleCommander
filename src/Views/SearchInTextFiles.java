@@ -29,10 +29,10 @@ import javafx.event.EventHandler;
 // ===== JavaFX imports - END
 
 
-public class SimpleCommander extends Application
+public class SearchInTextFiles extends Application
 {
     private final String appVersion = "0.3";
-    private final String appName = "SearchInFiles";
+    private final String appName = "SearchInTxtFiles";
     private Stage window;
     private Scene scene1;
 
@@ -142,8 +142,8 @@ public class SimpleCommander extends Application
         TabPane tabPane = new TabPane();
         uiControls.put("tabPane", tabPane);
         tabPane.setStyle("-fx-background-color: lightblue");
-        tabSearchInFolder = new TabSearchFileContentInFolder("Search in folder");
-        Tab tabSearchInFiles = new TabSearchFileContentInFiles("Search in list of files");
+        tabSearchInFolder = new TabSearchFileContentInFolder("Search files content from folder");
+        Tab tabSearchInFiles = new TabSearchFileContentFromFiles("Search files content from list of files");
         tabPane.getTabs().add(tabSearchInFolder);
         tabPane.getTabs().add(tabSearchInFiles);
         tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);

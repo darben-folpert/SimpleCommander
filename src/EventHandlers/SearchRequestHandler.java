@@ -11,10 +11,10 @@ import java.util.Enumeration;
 
 class SearchRequestHandler implements EventHandler<ActionEvent>
 {
-    private SimpleCommander mainWindow;
+    private SearchInTextFiles mainWindow;
     private Hashtable<String, Control> controls;
 
-    public SearchRequestHandler(SimpleCommander mainWindow, Hashtable<String, Control> uiControls)
+    public SearchRequestHandler(SearchInTextFiles mainWindow, Hashtable<String, Control> uiControls)
     {
         this.mainWindow = mainWindow;
         controls = uiControls;

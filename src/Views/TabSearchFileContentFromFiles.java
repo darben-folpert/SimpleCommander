@@ -5,9 +5,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextArea;
 
-public class TabSearchFileContentInFiles extends Tab
+public class TabSearchFileContentFromFiles extends Tab
 {
-    public TabSearchFileContentInFiles(String tabTitle)
+    public TabSearchFileContentFromFiles(String tabTitle)
     {
         super(tabTitle);
         VBox vbox = new VBox();
@@ -17,7 +17,7 @@ public class TabSearchFileContentInFiles extends Tab
 
     private void createControls(Pane parent)
     {
-        final String tabTitle = "Search in file content from a specified list of files";
+        final String tabTitle = "Browse files content from a given list of files";
         Label lblTabTitle = new Label(tabTitle);
         TextArea txtFilesList = new TextArea();
         parent.getChildren().addAll(lblTabTitle, txtFilesList);

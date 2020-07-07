@@ -2,7 +2,7 @@ src/Controllers/SearchProcessor.java
 src/EventHandlers/SearchRequestHandler.java
 src/Views/DialogCloseWindowConfirmation.java
 src/Views/DialogError.java
-src/Views/SimpleCommander.java
-src/Views/TabSearchFileContentInFiles.java
+src/Views/SearchInTextFiles.java
+src/Views/TabSearchFileContentFromFiles.java
 src/Views/TabSearchFileContentInFolder.java
 
