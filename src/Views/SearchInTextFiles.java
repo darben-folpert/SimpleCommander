@@ -31,13 +31,17 @@ import javafx.event.EventHandler;
 
 public class SearchInTextFiles extends Application
 {
-    private final String appVersion = "0.3";
+    private final String appVersion = "0.4";
     private final String appName = "SearchInTxtFiles";
     private Stage window;
     private Scene scene1;
 
     TextField txtSearch;
+
     TabSearchFileContentInFolder tabSearchInFolder;
+    TabSearchFileContentFromFiles tabSearchInFiles;
+    TabSearchFileNames tabSearchFileNames;
+
     TextArea txtResult;
     Hashtable<String, Control> uiControls;
 
@@ -143,9 +147,11 @@ public class SearchInTextFiles extends Application
         uiControls.put("tabPane", tabPane);
         tabPane.setStyle("-fx-background-color: lightblue");
         tabSearchInFolder = new TabSearchFileContentInFolder("Search files content from folder");
-        Tab tabSearchInFiles = new TabSearchFileContentFromFiles("Search files content from list of files");
+        tabSearchInFiles = new TabSearchFileContentFromFiles("Search files content from list of files");
+        tabSearchFileNames = new TabSearchFileNames("Search for files with name");
         tabPane.getTabs().add(tabSearchInFolder);
         tabPane.getTabs().add(tabSearchInFiles);
+        tabPane.getTabs().add(tabSearchFileNames);
         tabPane.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
         parent.getChildren().add(tabPane);
     }

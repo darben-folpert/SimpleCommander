@@ -22,6 +22,7 @@ class SearchRequestHandler implements EventHandler<ActionEvent>
 
     public void handle(ActionEvent event)
     {
+        System.out.println("So we just clicked.");
         List<String> params = new ArrayList<String>();
         params.add(mainWindow.getFieldValue(0));
         params.add(mainWindow.getFieldValue(1));

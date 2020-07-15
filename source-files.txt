@@ -5,4 +5,5 @@ src/Views/DialogError.java
 src/Views/SearchInTextFiles.java
 src/Views/TabSearchFileContentFromFiles.java
 src/Views/TabSearchFileContentInFolder.java
+src/Views/TabSearchFileNames.java
 
